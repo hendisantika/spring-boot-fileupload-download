@@ -2,7 +2,10 @@ package id.my.hendisantika.fileuploaddownload.controller;
 
 import id.my.hendisantika.fileuploaddownload.service.FileProcessingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -22,4 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FileProcessingController {
 
     private final FileProcessingService fileProcessingService;
+
+    @GetMapping("/list")
+    public ResponseEntity<?> getFileList() {
+        return new ResponseEntity<>(fileProcessingService.fileList(), HttpStatus.OK);
+    }
 }
