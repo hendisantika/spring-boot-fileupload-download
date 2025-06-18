@@ -3,6 +3,11 @@ package id.my.hendisantika.fileuploaddownload.service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : spring-boot-fileupload-download
@@ -18,4 +23,11 @@ import org.springframework.stereotype.Service;
 public class FileProcessingService {
     @Value("${filePath}")
     private String basePath;
+
+    public List<String> fileList() {
+        File dir = new File(basePath);
+        File[] files = dir.listFiles();
+
+        return files != null ? Arrays.stream(files).map(File::getName).collect(Collectors.toList()) : null;
+    }
 }
