@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.Arrays;
@@ -38,5 +40,15 @@ class FileProcessingServiceTest {
         List<String> fileList = service.fileList();
 
         assertEquals(fileList, existing);
+    }
+
+    @Test
+    public void fileUploadMethodShouldReturnCreatedOnSuccess() {
+        MultipartFile mf = new MockMultipartFile("testUpload.txt", "This is test".getBytes());
+        String response = service.uploadFile(mf);
+        assertEquals("CREATED", response);
+
+        File file = new File(filePath + "testUpload.txt");
+        file.delete();
     }
 }
