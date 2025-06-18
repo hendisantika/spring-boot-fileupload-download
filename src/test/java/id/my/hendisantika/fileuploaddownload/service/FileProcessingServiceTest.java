@@ -1,8 +1,16 @@
 package id.my.hendisantika.fileuploaddownload.service;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,4 +31,12 @@ class FileProcessingServiceTest {
     @Autowired
     private FileProcessingService service;
 
+    @Test
+    public void fileListMethodShouldReturnTheExistingFileList() {
+        File file = new File(filePath);
+        List<String> existing = Arrays.asList(Objects.requireNonNull(file.list()));
+        List<String> fileList = service.fileList();
+
+        assertEquals(fileList, existing);
+    }
 }
