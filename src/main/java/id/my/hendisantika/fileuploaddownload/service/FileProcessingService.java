@@ -1,6 +1,8 @@
 package id.my.hendisantika.fileuploaddownload.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,5 +53,18 @@ public class FileProcessingService {
             System.out.println(e.getMessage());
         }
         return "FAILED";
+    }
+
+    public Resource downloadFile(String fileName) {
+        File dir = new File(basePath + fileName);
+        try {
+            if (dir.exists()) {
+                return new UrlResource(dir.toURI());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        return null;
     }
 }
