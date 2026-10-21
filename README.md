@@ -1,20 +1,24 @@
 # Spring Boot File Upload and Download
 
+[![Java CI with Maven](https://github.com/hendisantika/spring-boot-fileupload-download/actions/workflows/maven.yml/badge.svg)](https://github.com/hendisantika/spring-boot-fileupload-download/actions/workflows/maven.yml)
+![Java](https://img.shields.io/badge/Java-25-orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.1.1-brightgreen)
+
 A simple Spring Boot application that provides REST API endpoints for uploading, downloading, and listing files.
 
 ## Technologies Used
 
-- Java 21
-- Spring Boot 3.5.0
-- Maven
+- Java 25
+- Spring Boot 4.1.1
+- Maven (wrapper included)
 - Lombok
 - JUnit 5
 - Mockito
 
 ## Prerequisites
 
-- Java 21 or higher
-- Maven 3.9.9 or higher
+- Java 25 or higher
+- Maven 3.9.9 or higher (or use the bundled `./mvnw`)
 
 ## Project Structure
 
@@ -28,7 +32,7 @@ The project follows a standard Spring Boot application structure:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/spring-boot-fileupload-download.git
+   git clone https://github.com/hendisantika/spring-boot-fileupload-download.git
    cd spring-boot-fileupload-download
    ```
 
@@ -135,6 +139,23 @@ The application includes unit tests for both the controller and service layers. 
 ```bash
 mvn test
 ```
+
+The controller tests use Spring Boot 4's `@WebMvcTest` (from `spring-boot-starter-webmvc-test`) together with
+`@MockitoBean`, which replaces the removed `@MockBean` annotation.
+
+## Continuous Integration
+
+GitHub Actions (`.github/workflows/maven.yml`) builds and tests the project with Temurin JDK 25 on every push and pull
+request to `main`, then submits the Maven dependency graph to GitHub for better Dependabot alerts.
+
+## Dependency Updates
+
+Dependabot (`.github/dependabot.yml`) checks for updates daily at 05:00 (Asia/Jakarta):
+
+- **Maven** – minor/patch updates are grouped into `spring-boot`, `testing`, `maven-plugins` and
+  `other-dependencies` PRs; major updates arrive as individual PRs. Commits use the `build(deps)` /
+  `build(deps-dev)` prefixes.
+- **GitHub Actions** – all action updates are grouped into a single PR with the `ci(deps)` prefix.
 
 ## License
 
