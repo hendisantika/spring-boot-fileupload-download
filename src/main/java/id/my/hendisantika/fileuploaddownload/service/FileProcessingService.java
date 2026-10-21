@@ -1,5 +1,6 @@
 package id.my.hendisantika.fileuploaddownload.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -29,6 +31,11 @@ import java.util.stream.Collectors;
 public class FileProcessingService {
     @Value("${filePath}")
     private String basePath;
+
+    @PostConstruct
+    void init() throws IOException {
+        Files.createDirectories(Path.of(basePath));
+    }
 
     public List<String> fileList() {
         File dir = new File(basePath);

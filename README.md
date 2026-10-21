@@ -57,8 +57,7 @@ spring.application.name=spring-boot-fileupload-download
 filePath=./temp/
 ```
 
-Make sure the `temp` directory exists in the project root, or modify the `filePath` property to point to an existing
-directory.
+The directory configured by `filePath` is created automatically on startup if it does not exist.
 
 ## API Endpoints
 
