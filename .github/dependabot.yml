@@ -7,10 +7,73 @@ updates:
       time: '05:00'
       timezone: Asia/Jakarta
     open-pull-requests-limit: 10
-  - package-ecosystem: "github-actions"
+    target-branch: main
+    rebase-strategy: auto
+    assignees:
+      - hendisantika
+    labels:
+      - dependencies
+      - java
+    commit-message:
+      prefix: "build(deps)"
+      prefix-development: "build(deps-dev)"
+      include: scope
+    groups:
+      spring-boot:
+        patterns:
+          - "org.springframework.boot*"
+          - "org.springframework*"
+        update-types:
+          - minor
+          - patch
+      testing:
+        dependency-type: development
+        patterns:
+          - "org.mockito*"
+          - "org.junit*"
+          - "org.assertj*"
+        update-types:
+          - minor
+          - patch
+      maven-plugins:
+        patterns:
+          - "org.apache.maven.plugins*"
+          - "*-maven-plugin"
+        update-types:
+          - minor
+          - patch
+      other-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "org.springframework*"
+          - "org.mockito*"
+          - "org.junit*"
+          - "org.assertj*"
+          - "org.apache.maven.plugins*"
+          - "*-maven-plugin"
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: daily
       time: '05:00'
       timezone: Asia/Jakarta
     open-pull-requests-limit: 10
+    target-branch: main
+    rebase-strategy: auto
+    assignees:
+      - hendisantika
+    labels:
+      - dependencies
+      - github_actions
+    commit-message:
+      prefix: "ci(deps)"
+      include: scope
+    groups:
+      github-actions:
+        patterns:
+          - "*"
