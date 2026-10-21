@@ -145,7 +145,8 @@ The controller tests use Spring Boot 4's `@WebMvcTest` (from `spring-boot-starte
 ## Continuous Integration
 
 GitHub Actions (`.github/workflows/maven.yml`) builds and tests the project with Temurin JDK 25 on every push and pull
-request to `main`, then submits the Maven dependency graph to GitHub for better Dependabot alerts.
+request to `main`. On pushes to `main` it also submits the Maven dependency graph to GitHub for better Dependabot
+alerts (non-blocking; enable *Settings → Code security → Dependency graph* for it to succeed).
 
 ## Dependency Updates
 
